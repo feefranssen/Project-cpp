@@ -10,17 +10,9 @@ private:
     int baseDamage;
 
 public:
-    Weapon(const std::string& name, int baseDamage)
-        : name(name), baseDamage(baseDamage) {}
-
-    std::string getName() const { return name; }
-
-    int getDamage() const {
-        static std::random_device rd;
-        static std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dist(baseDamage - 2, baseDamage + 2);
-        return dist(gen);
-    }
+    Weapon(const std::string& name, int baseDamage);
+    std::string getName() const;
+    int getDamage() const;
 };
 
-#endif
+#endif // WEAPON_H

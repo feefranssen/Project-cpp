@@ -1,5 +1,6 @@
 #include "hero.h"
 #include "enemy.h"
+#include "weapon.h"
 #include <iostream>
 
 int main() {
@@ -14,4 +15,6 @@ int main() {
 
     std::cout << goblin.getName() << " health: " << goblin.getHealth() << "\n";
     std::cout << hero.getName() << " health: " << hero.getHealth() << "\n";
+
+    return 0;
 }

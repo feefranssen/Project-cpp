@@ -9,7 +9,11 @@ add_executable(cpp_eindproject main.cpp
     character.h
     enemy.h
     hero.h
-    weapon.h)
+    weapon.h
+    character.cpp
+    enemy.cpp
+    hero.cpp
+    weapon.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS cpp_eindproject

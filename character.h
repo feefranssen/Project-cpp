@@ -9,21 +9,15 @@ protected:
     int health;
 
 public:
-    Character(const std::string& name, int health)
-        : name(name), health(health) {}
-
-    virtual ~Character() {}
+    Character(const std::string& name, int health);
+    virtual ~Character();
 
     virtual void attack(Character& target) = 0;
 
-    int getHealth() const { return health; }
+    int getHealth() const;
+    const std::string& getName() const;
 
-    std::string getName() const { return name; }
-
-    virtual void takeDamage(int amount) {
-        health -= amount;
-        if (health < 0) health = 0;
-    }
+    virtual void takeDamage(int amount);
 };
 
-#endif
+#endif // CHARACTER_H
