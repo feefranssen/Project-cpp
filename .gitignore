@@ -181,3 +181,8 @@ build/
 *.dll
 *.pdb
 
+# Ignore CMake cache and build artifacts
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+/build*/
