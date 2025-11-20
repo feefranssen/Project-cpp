@@ -1,4 +1,5 @@
 # This file is used to ignore files which are generated
+<<<<<<< HEAD
 # ----------------------------------------------------------------------------
 
 *~
@@ -79,4 +80,5 @@ CMakeLists.txt.user*
 .pch/
 .rcc/
 .uic/
-/build*/
+=======
+
