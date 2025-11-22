@@ -1,18 +1,25 @@
-#include "enemy.h"
+#include "Enemy.h"
 #include <iostream>
-#include <random>
 
-Enemy::Enemy(const std::string& name, int health)
-    : Character(name, health)
+//  Constructor forwarding: default → parameterized
+Enemy::Enemy()
+    : Enemy("Goblin", 40, Weapon("Claws", 5))
 {}
 
-void Enemy::attack(Character& target) {
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(3, 7);
-    int damage = dist(gen);
+Enemy::Enemy(const std::string& name, int health, const Weapon& weapon)
+    : Character(name, health, weapon.getDamage()), weapon(weapon)
+{}
 
-    std::cout << name << " viciously bites " << target.getName()
-              << " for " << damage << " damage!\n";
+Enemy::Enemy(const Enemy& other)
+    : Character(other.name, other.health, other.weapon.getDamage()), weapon(other.weapon)
+{}
+
+Enemy::~Enemy() {}
+
+void Enemy::attack(Character& target) {
+    int damage = weapon.getDamage();
+    std::cout << name << " valt " << target.getName()
+              << " aan met " << weapon.getName()
+              << " voor " << damage << " schade!\n";
     target.takeDamage(damage);
 }
