@@ -7,16 +7,23 @@ class Character {
 protected:
     std::string name;
     int health;
+    int baseDamage;
 
 public:
-    Character(const std::string& name, int health);
-    virtual ~Character();
+    Character(); // default constructor
+    Character(const std::string& name, int health, int baseDamage); // parameterized constructor
+    virtual ~Character(); // virtual destructor
 
-    virtual void attack(Character& target) = 0;
+    virtual void attack(Character& target) = 0; // pure virtual function
 
-    int getHealth() const;
-    const std::string& getName() const;
+    // Inline getters
+    int getHealth() const { return health; }
+    const std::string& getName() const { return name; }
 
+    // Setter met gebruik van 'this'
+    Character* setHealth(int h) { this->health = h; return this; }
+
+    // Member function
     virtual void takeDamage(int amount);
 };
 

@@ -10,7 +10,10 @@ private:
     int baseDamage;
 
 public:
-    Weapon(const std::string& name, int baseDamage);
+    Weapon(); // default constructor (forwarded)
+    Weapon(const std::string& name, int baseDamage); // parameterized constructor
+    Weapon(const Weapon& other); // copy constructor
+
     std::string getName() const;
     int getDamage() const;
 };

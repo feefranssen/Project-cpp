@@ -1,7 +1,16 @@
-#include "weapon.h"
+#include "Weapon.h"
+
+//  Constructor forwarding
+Weapon::Weapon()
+    : Weapon("Fists", 3)
+{}
 
 Weapon::Weapon(const std::string& name, int baseDamage)
     : name(name), baseDamage(baseDamage)
+{}
+
+Weapon::Weapon(const Weapon& other)
+    : name(other.name), baseDamage(other.baseDamage)
 {}
 
 std::string Weapon::getName() const {

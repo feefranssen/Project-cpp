@@ -1,18 +1,14 @@
-#include "character.h"
+#include "Character.h"
 
-Character::Character(const std::string& name, int health)
-    : name(name), health(health)
+Character::Character()
+    : name("Default"), health(50), baseDamage(5)
 {}
 
-Character::~Character() = default;
+Character::Character(const std::string& name, int health, int baseDamage)
+    : name(name), health(health), baseDamage(baseDamage)
+{}
 
-int Character::getHealth() const {
-    return health;
-}
-
-const std::string& Character::getName() const {
-    return name;
-}
+Character::~Character() {}
 
 void Character::takeDamage(int amount) {
     health -= amount;
