@@ -1,7 +1,8 @@
-QT = core \
-    widgets
+QT       += core gui
 
-CONFIG += c++17 cmdline
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -15,18 +16,17 @@ SOURCES += \
         mainwindow.cpp \
         weapon.cpp
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
 HEADERS += \
-    character.h \
-    enemy.h \
-    hero.h \
-    mainwindow.h \
-    weapon.h
+        character.h \
+        enemy.h \
+        hero.h \
+        mainwindow.h \
+        weapon.h
 
 FORMS += \
     mainwindow.ui
 
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
