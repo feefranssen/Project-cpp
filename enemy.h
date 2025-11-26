@@ -18,4 +18,4 @@ public:
     virtual void attack(Character& target) override; // polymorphic attack
 };
 
-#endif // ENEMY_H
+#endif // ENEMY_H HALLO
