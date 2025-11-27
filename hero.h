@@ -11,7 +11,6 @@ class Hero : public Character {
 public:
     Hero();
     Hero(const std::string& name, int health, const Weapon& weapon);
-
     Hero(const Hero& other);
     virtual ~Hero();
 

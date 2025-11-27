@@ -17,6 +17,7 @@ SOURCES += \
         weapon.cpp
 
 HEADERS += \
+        Utils.h \
         character.h \
         enemy.h \
         hero.h \

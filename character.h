@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Weapon.h"
+#include <iostream>
 
 namespace Game {
 
@@ -13,33 +14,29 @@ protected:
     Weapon weapon;
 
 public:
-    // Default constructor
-    Character();
+    Character(); // default constructor
+    Character(const std::string& name, int health, const Weapon& weapon); // parameterized constructor
+    Character(const Character& other); // copy constructor
+    virtual ~Character(); // virtual destructor
 
-    // Parameterized constructor
-    Character(const std::string& name, int health, const Weapon& weapon);
+    // Getters (inline)
+    const std::string& getName() const { return name; }
+    int getHealth() const { return health; }
+    const Weapon& getWeapon() const { return weapon; }
 
-    // Copy constructor
-    Character(const Character& other);
+    // Setter using this
+    void setHealth(int h) { this->health = h; }
 
-    // Virtual destructor
-    virtual ~Character();
-
-    // Getters
-    inline const std::string& getName() const { return name; }
-    inline int getHealth() const { return health; }
-    inline const Weapon& getWeapon() const { return weapon; }
-
-    // Setters (example use of 'this')
-    inline void setHealth(int h) { this->health = h; }
-
-    // Default parameter added here (1 damage if nothing provided)
+    // Member function: default parameter
     virtual void takeDamage(int amount = 1);
 
     // Polymorphic function
-    virtual void attack(Character* target);
+    virtual void attack(Character* target) = 0;
+
+    // Friend operator
+    friend std::ostream& operator<<(std::ostream& os, const Character& c);
 };
 
 }
 
-#endif
+#endif // CHARACTER_H test

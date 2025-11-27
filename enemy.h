@@ -11,7 +11,6 @@ class Enemy : public Character {
 public:
     Enemy();
     Enemy(const std::string& name, int health, const Weapon& weapon);
-
     Enemy(const Enemy& other);
     virtual ~Enemy();
 
