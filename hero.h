@@ -5,17 +5,19 @@
 #include "Weapon.h"
 #include <string>
 
+namespace Game {
+
 class Hero : public Character {
-private:
-    Weapon weapon;
-
 public:
-    Hero(); // default constructor
-    Hero(const std::string& name, int health, const Weapon& weapon); // parameterized constructor
-    Hero(const Hero& other); // copy constructor
-    virtual ~Hero(); // destructor
+    Hero();
+    Hero(const std::string& name, int health, const Weapon& weapon);
 
-    virtual void attack(Character& target) override; // polymorphic attack
+    Hero(const Hero& other);
+    virtual ~Hero();
+
+    virtual void attack(Character* target) override;
 };
 
-#endif // HERO_H
+}
+
+#endif

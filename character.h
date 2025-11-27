@@ -2,29 +2,44 @@
 #define CHARACTER_H
 
 #include <string>
+#include "Weapon.h"
+
+namespace Game {
 
 class Character {
 protected:
     std::string name;
     int health;
-    int baseDamage;
+    Weapon weapon;
 
 public:
-    Character(); // default constructor
-    Character(const std::string& name, int health, int baseDamage); // parameterized constructor
-    virtual ~Character(); // virtual destructor
+    // Default constructor
+    Character();
 
-    virtual void attack(Character& target) = 0; // pure virtual function
+    // Parameterized constructor
+    Character(const std::string& name, int health, const Weapon& weapon);
 
-    // Inline getters
-    int getHealth() const { return health; }
-    const std::string& getName() const { return name; }
+    // Copy constructor
+    Character(const Character& other);
 
-    // Setter met gebruik van 'this'
-    Character* setHealth(int h) { this->health = h; return this; }
+    // Virtual destructor
+    virtual ~Character();
 
-    // Member function
-    virtual void takeDamage(int amount);
+    // Getters
+    inline const std::string& getName() const { return name; }
+    inline int getHealth() const { return health; }
+    inline const Weapon& getWeapon() const { return weapon; }
+
+    // Setters (example use of 'this')
+    inline void setHealth(int h) { this->health = h; }
+
+    // Default parameter added here (1 damage if nothing provided)
+    virtual void takeDamage(int amount = 1);
+
+    // Polymorphic function
+    virtual void attack(Character* target);
 };
 
-#endif // CHARACTER_H
+}
+
+#endif
