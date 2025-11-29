@@ -12,6 +12,8 @@ protected:
     std::string name;
     int health;
     Weapon weapon;
+    unsigned char level;  // geheugen-efficiënt level
+    bool isAlive;         // status of character nog leeft
 
 public:
     Character(); // default constructor
@@ -19,10 +21,12 @@ public:
     Character(const Character& other); // copy constructor
     virtual ~Character(); // virtual destructor
 
-    // Getters (inline)
+    // Inline getters
     const std::string& getName() const { return name; }
     int getHealth() const { return health; }
     const Weapon& getWeapon() const { return weapon; }
+    bool getIsAlive() const { return isAlive; }
+    unsigned char getLevel() const { return level; }
 
     // Setter using this
     void setHealth(int h) { this->health = h; }
@@ -39,4 +43,4 @@ public:
 
 }
 
-#endif // CHARACTER_H test
+#endif // CHARACTER_H

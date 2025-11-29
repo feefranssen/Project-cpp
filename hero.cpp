@@ -23,6 +23,10 @@ void Hero::attack(Character* target) {
               << " voor " << dmg << " schade!\n";
 
     target->takeDamage(dmg);
+
+    // Hero krijgt experience → level omhoog
+    level++;
 }
+
 
 }
