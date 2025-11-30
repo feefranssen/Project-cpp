@@ -8,6 +8,10 @@
 namespace Game {
 
 class Enemy : public Character {
+private:
+    Weapon weapon;
+    bool aggressive;  // voor Aggression mechanic
+
 public:
     Enemy();
     Enemy(const std::string& name, int health, const Weapon& weapon);
@@ -15,6 +19,11 @@ public:
     virtual ~Enemy();
 
     virtual void attack(Character* target) override;
+
+    // Aggression functies
+    bool isAggressive() const { return aggressive; }
+    void applyAggression() { aggressive = true; }
+    void consumeAggression() { aggressive = false; }
 };
 
 }

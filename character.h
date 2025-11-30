@@ -2,7 +2,6 @@
 #define CHARACTER_H
 
 #include <string>
-#include "Weapon.h"
 #include <iostream>
 
 namespace Game {
@@ -11,36 +10,34 @@ class Character {
 protected:
     std::string name;
     int health;
-    Weapon weapon;
-    unsigned char level;  // geheugen-efficiënt level
-    bool isAlive;         // status of character nog leeft
+    int baseDamage;
+    int level;   // level toegevoegd
 
 public:
     Character(); // default constructor
-    Character(const std::string& name, int health, const Weapon& weapon); // parameterized constructor
+    Character(const std::string& name, int health, int baseDamage); // parameterized constructor
     Character(const Character& other); // copy constructor
-    virtual ~Character(); // virtual destructor
+    virtual ~Character();
 
-    // Inline getters
-    const std::string& getName() const { return name; }
-    int getHealth() const { return health; }
-    const Weapon& getWeapon() const { return weapon; }
-    bool getIsAlive() const { return isAlive; }
-    unsigned char getLevel() const { return level; }
-
-    // Setter using this
-    void setHealth(int h) { this->health = h; }
-
-    // Member function: default parameter
-    virtual void takeDamage(int amount = 1);
-
-    // Polymorphic function
     virtual void attack(Character* target) = 0;
 
-    // Friend operator
-    friend std::ostream& operator<<(std::ostream& os, const Character& c);
+    // Getters
+    int getHealth() const { return health; }
+    const std::string& getName() const { return name; }
+    int getLevel() const { return level; }  // getter level
+    bool getIsAlive() const { return health > 0; }
+
+    // Setters
+    void setHealth(int h) { this->health = h; }
+
+    // Level up
+    void levelUp() { level++; }
+
+    virtual void takeDamage(int amount);
 };
+
+std::ostream& operator<<(std::ostream& os, const Character& c);
 
 }
 
-#endif // CHARACTER_H
+#endif

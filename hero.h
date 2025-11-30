@@ -8,6 +8,9 @@
 namespace Game {
 
 class Hero : public Character {
+private:
+    Weapon weapon;
+
 public:
     Hero();
     Hero(const std::string& name, int health, const Weapon& weapon);
