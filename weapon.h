@@ -10,12 +10,14 @@ namespace Game {
 class Weapon {
 private:
     std::string name;
-    int baseDamage;
+    unsigned char baseDamage;
 
 public:
     Weapon(); // default constructor
-    Weapon(const std::string& name, int baseDamage); // parameterized constructor
+    Weapon(const std::string& name, unsigned char baseDamage); // parameterized constructor
     Weapon(const Weapon& other); // copy constructor
+
+    Weapon& operator=(const Weapon& other);
 
     std::string getName() const;
     int getDamage() const;

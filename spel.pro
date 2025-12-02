@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
         character.cpp \
         enemy.cpp \
+        gamefactory.cpp \
         hero.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -20,6 +21,7 @@ HEADERS += \
         Utils.h \
         character.h \
         enemy.h \
+        gamefactory.h \
         hero.h \
         mainwindow.h \
         weapon.h

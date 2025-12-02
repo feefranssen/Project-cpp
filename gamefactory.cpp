@@ -1,0 +1,37 @@
+#include "GameFactory.h"
+
+#include <random>
+#include <vector>
+
+using namespace Game;
+
+Weapon GameFactory::getRandomHeroWeapon() {
+    static std::vector<Weapon> heroWeapons = {
+        Weapon("Sword", 10),
+        Weapon("Axe", 12),
+        Weapon("Dagger", 8)
+    };
+
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, heroWeapons.size() - 1);
+
+    return heroWeapons[dist(gen)];
+}
+
+std::shared_ptr<Character> GameFactory::spawnRandomEnemy() {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, 2);
+
+    switch (dist(gen)) {
+    case 0:
+        return std::make_shared<Enemy>("Goblin", 30, Weapon("Claws", 10));
+    case 1:
+        return std::make_shared<Enemy>("Orc", 50, Weapon("Claws", 7));
+    case 2:
+        return std::make_shared<Enemy>("Troll", 80, Weapon("Claws", 5));
+    default:
+        return std::make_shared<Enemy>("Goblin", 30, Weapon("Claws", 10));
+    }
+}

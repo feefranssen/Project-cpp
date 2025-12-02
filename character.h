@@ -10,12 +10,12 @@ class Character {
 protected:
     std::string name;
     int health;
-    int baseDamage;
-    int level;   // level toegevoegd
+    unsigned char baseDamage;   // memory efficient
+    unsigned char level;        // memory efficient
 
 public:
     Character(); // default constructor
-    Character(const std::string& name, int health, int baseDamage); // parameterized constructor
+    Character(const std::string& name, int health, unsigned char baseDamage); // parameterized constructor
     Character(const Character& other); // copy constructor
     virtual ~Character();
 

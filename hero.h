@@ -10,6 +10,7 @@ namespace Game {
 class Hero : public Character {
 private:
     Weapon weapon;
+    unsigned char baseDamage;
 
 public:
     Hero();
@@ -18,6 +19,9 @@ public:
     virtual ~Hero();
 
     virtual void attack(Character* target) override;
+
+    void setWeapon(const Weapon& weapon);   // this-> gebruik
+    void heal(int amount = 5);              // default argument
 };
 
 }

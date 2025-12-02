@@ -14,6 +14,16 @@ Hero::Hero(const Hero& other)
 
 Hero::~Hero() {}
 
+void Hero::heal(int amount) {
+    std::cout << name << " healt zichzelf voor " << amount << " HP!\n";
+    int newHP = health + amount;
+    setHealth(newHP);
+}
+
+void Hero::setWeapon(const Weapon& weapon) {
+    this->weapon = weapon;   // <-- nuttige this
+}
+
 void Hero::attack(Character* target) {
     int damage = weapon.getDamage();
     std::cout << name << " valt " << target->getName()
@@ -22,7 +32,7 @@ void Hero::attack(Character* target) {
     target->takeDamage(damage);
 
     // Optioneel: level omhoog bij aanval
-    if (rand() % 100 < 20) {  // 20% kans
+    if (rand() % 100 < 40) {  // 20% kans
         levelUp();
         std::cout << name << " stijgt naar level " << getLevel() << "!\n";
     }

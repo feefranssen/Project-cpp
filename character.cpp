@@ -6,7 +6,7 @@ Character::Character()
     : name("Default"), health(50), baseDamage(5), level(1)
 {}
 
-Character::Character(const std::string& name, int health, int baseDamage)
+Character::Character(const std::string& name, int health, unsigned char baseDamage)
     : name(name), health(health), baseDamage(baseDamage), level(1)
 {}
 

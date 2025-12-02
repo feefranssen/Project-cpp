@@ -11,6 +11,7 @@ class Enemy : public Character {
 private:
     Weapon weapon;
     bool aggressive;  // voor Aggression mechanic
+    unsigned char baseDamage;
 
 public:
     Enemy();
