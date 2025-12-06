@@ -17,6 +17,7 @@ Enemy::~Enemy() {}
 void Enemy::attack(Character* target) {
     int damage = weapon.getDamage();
 
+    // Aggression boost
     if (isAggressive()) {
         damage += 3;
         std::cout << "(Aggression Boost!) ";
@@ -29,18 +30,31 @@ void Enemy::attack(Character* target) {
 
     target->takeDamage(damage);
 
-    // 30% kans om agressief te worden
+    // Poison chance
+    if (rand() % 100 < 25) {
+        std::cout << name << " vergiftigt "
+                  << target->getName() << "!\n";
+        target->takeDamage(3);
+    }
+
+    // Summon chance
+    if (rand() % 100 < 20) {
+        std::cout << name << " roept een extra enemy op!!\n";
+        // dit kun je later uitbreiden
+    }
+
+    // Become aggressive
     if (rand() % 100 < 30) {
         applyAggression();
         std::cout << name << " raakt agressief!\n";
     }
 
-    // Optioneel: level omhoog bij aanval
-    if (rand() % 100 < 20) {  // 20% kans
+    // Level up chance
+    if (rand() % 100 < 20) {
         levelUp();
-        std::cout << name << " stijgt naar level " << getLevel() << "!\n";
+        std::cout << name << " stijgt naar level "
+                  << getLevel() << "!\n";
     }
 }
-
 
 }

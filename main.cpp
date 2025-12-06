@@ -7,11 +7,15 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <random>
+#include <ctime>      // voor srand(time(0))
+#include <cstdlib>    // voor rand()
 
 using namespace Game;
 
 int main() {
+    // Seed random generator
+    srand(static_cast<unsigned int>(time(nullptr)));
+
     // Hero krijgt een random wapen
     std::shared_ptr<Character> hero =
         std::make_shared<Hero>("Arthur", 40, GameFactory::getRandomHeroWeapon());
@@ -37,6 +41,11 @@ int main() {
         if (!enemy->getIsAlive()) {
             std::cout << enemy->getName() << " is verslagen!\n";
             break;
+        }
+
+        // Hero kan ook healen (optioneel, 30% kans)
+        if (rand() % 100 < 30) {
+            std::dynamic_pointer_cast<Hero>(hero)->heal(5);
         }
 
         // Enemy valt Hero aan

@@ -11,6 +11,7 @@ class Hero : public Character {
 private:
     Weapon weapon;
     unsigned char baseDamage;
+    bool dodge();
 
 public:
     Hero();
@@ -18,6 +19,7 @@ public:
     Hero(const Hero& other);
     virtual ~Hero();
 
+    virtual void takeDamage(int amount) override;
     virtual void attack(Character* target) override;
 
     void setWeapon(const Weapon& weapon);   // this-> gebruik
