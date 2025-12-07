@@ -1,5 +1,5 @@
-#include "Utils.h"
 #include "Hero.h"
+#include "Utils.h"
 #include <iostream>
 
 namespace Game {
@@ -19,18 +19,16 @@ bool Hero::dodge() {
     return rand() % 100 < 20; // 20% kans
 }
 
-void Hero::attack(Character* target) {
+void Hero::attack(Character& target) {
     int damage = weapon.getDamage();
-    std::cout << name << " valt " << target->getName()
+    std::cout << name << " valt " << target.getName()
               << " aan met " << weapon.getName()
               << " voor " << damage << " schade!\n";
-    target->takeDamage(damage);
+    target.takeDamage(damage);
 
-    // Level up chance
     if (rand() % 100 < 40) {
         levelUp();
-        std::cout << name << " stijgt naar level "
-                  << getLevel() << "!\n";
+        std::cout << name << " stijgt naar level " << getLevel() << "!\n";
     }
 }
 
@@ -39,22 +37,28 @@ void Hero::takeDamage(int amount) {
         std::cout << getName() << " dodged the attack!\n";
         return;
     }
-    Character::takeDamage(amount);
-}
 
+    health -= amount;
+    if (health < 0) health = 0;
+}
 
 void Hero::heal(int amount) {
-    std::cout << name << " healt zichzelf voor " << amount << " HP!\n";
-
     int newHP = health + amount;
-
-    // template-functie gebruiken
-    newHP = Utils::clamp<int>(newHP, 0, 100); // <-- <int> is belangrijk voor templates
-
+    newHP = Utils::clamp<int>(newHP, 0, 100);
     setHealth(newHP);
+    std::cout << name << " healt zichzelf voor " << amount << " HP, HP nu: " << health << "\n";
 }
 
-
+void Hero::handlePoison() {
+    if (poisonCounter > 0) {
+        int poisonDamage = 3;
+        health -= poisonDamage;
+        if (health < 0) health = 0;
+        std::cout << getName() << " lijdt " << poisonDamage
+                  << " poison schade, HP nu: " << health << "\n";
+        poisonCounter--;
+    }
+}
 
 void Hero::setWeapon(const Weapon& weapon) {
     this->weapon = weapon;

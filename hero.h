@@ -12,6 +12,7 @@ private:
     Weapon weapon;
     unsigned char baseDamage;
     bool dodge();
+    int poisonCounter = 0; // poison voor 2 rondes
 
 public:
     Hero();
@@ -20,10 +21,15 @@ public:
     virtual ~Hero();
 
     virtual void takeDamage(int amount) override;
-    virtual void attack(Character* target) override;
+    virtual void attack(Character& target) override;
 
-    void setWeapon(const Weapon& weapon);   // this-> gebruik
-    void heal(int amount = 5);              // default argument
+    void setWeapon(const Weapon& weapon);
+    void heal(int amount = 5);
+
+    // Poison functies
+    void handlePoison();
+    bool isPoisoned() const { return poisonCounter > 0; }
+    void setPoisonCounter(int rounds) { poisonCounter = rounds; }
 };
 
 }

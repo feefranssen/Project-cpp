@@ -1,5 +1,7 @@
 #include "Enemy.h"
+#include "Hero.h"
 #include "Utils.h"
+#include "GameFactory.h"
 #include <iostream>
 
 namespace Game {
@@ -15,54 +17,47 @@ Enemy::Enemy(const Enemy& other)
 
 Enemy::~Enemy() {}
 
-void Enemy::attack(Character* target) {
+void Enemy::attack(Character& target) {
     int damage = weapon.getDamage();
 
-    // Aggression boost
     if (isAggressive()) {
         damage += 3;
-        std::cout << "(Aggression Boost!) ";
         consumeAggression();
+        std::cout << "(Aggression Boost!) ";
     }
 
-    std::cout << name << " valt " << target->getName()
+    std::cout << name << " valt " << target.getName()
               << " aan met " << weapon.getName()
               << " voor " << damage << " schade!\n";
 
-    target->takeDamage(damage);
+    target.takeDamage(damage);
 
-    // Poison chance
-    if (rand() % 100 < 25) {
-        std::cout << name << " vergiftigt "
-                  << target->getName() << "!\n";
-        target->takeDamage(3);
+    Hero* hero = dynamic_cast<Hero*>(&target);
+    if (hero && !hero->isPoisoned() && rand() % 100 < 25) {
+        hero->setPoisonCounter(2);
+        std::cout << name << " vergiftigt " << hero->getName() << " voor 2 rondes!\n";
     }
 
-    // Summon chance
-    if (rand() % 100 < 20) {
-        std::cout << name << " roept een extra enemy op!!\n";
-
-        if (Utils::enemyList) {
-            Utils::enemyList->push_back(
-                std::make_shared<Enemy>("Minion", 20, Weapon("Claws", 4))
-                );
-        }
-
-    }
-
-
-    // Become aggressive
     if (rand() % 100 < 30) {
         applyAggression();
         std::cout << name << " raakt agressief!\n";
     }
 
-    // Level up chance
     if (rand() % 100 < 20) {
         levelUp();
-        std::cout << name << " stijgt naar level "
-                  << getLevel() << "!\n";
+        std::cout << name << " stijgt naar level " << getLevel() << "!\n";
     }
+
+    if (rand() % 100 < 20) { // 20% kans
+        if (Utils::enemyList != nullptr && Utils::enemyList->size() < 2) { // max 2 enemies
+            std::shared_ptr<Character> newEnemy = GameFactory::spawnRandomEnemy();
+            Utils::enemyList->push_back(newEnemy);
+            std::cout << name << " roept een extra enemy op: "
+                      << newEnemy->getName() << "!\n";
+        }
+    }
+
 }
+
 
 }

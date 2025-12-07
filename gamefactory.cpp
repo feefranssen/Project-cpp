@@ -28,9 +28,9 @@ std::shared_ptr<Character> GameFactory::spawnRandomEnemy() {
     case 0:
         return std::make_shared<Enemy>("Goblin", 30, Weapon("Claws", 10));
     case 1:
-        return std::make_shared<Enemy>("Orc", 50, Weapon("Claws", 7));
+        return std::make_shared<Enemy>("Orc", 40, Weapon("Claws", 7));
     case 2:
-        return std::make_shared<Enemy>("Troll", 80, Weapon("Claws", 5));
+        return std::make_shared<Enemy>("Troll", 50, Weapon("Claws", 5));
     default:
         return std::make_shared<Enemy>("Goblin", 30, Weapon("Claws", 10));
     }

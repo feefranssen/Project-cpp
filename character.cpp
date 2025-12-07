@@ -21,7 +21,6 @@ void Character::takeDamage(int amount) {
     if (health < 0) health = 0;
 }
 
-// Operator<< definitie
 std::ostream& operator<<(std::ostream& os, const Character& c) {
     os << c.getName() << " (Level: " << c.getLevel() << ", HP: " << c.getHealth() << ")";
     return os;

@@ -3,18 +3,16 @@
 
 #include <vector>
 #include <memory>
+#include "Character.h"
 
 namespace Game {
 
-// forward declaration
-class Character;
-
 class Utils {
 public:
-    // Ptr naar enemy list in main
+    // Pointer naar de enemy lijst
     static std::vector<std::shared_ptr<Character>>* enemyList;
 
-    // Template blijft gewoon bruisend hetzelfde
+    // Template functie
     template<typename T>
     static T clamp(T value, T min, T max) {
         if (value < min) return min;
@@ -23,6 +21,6 @@ public:
     }
 };
 
-}
+} // namespace Game
 
 #endif

@@ -1,8 +1,6 @@
 #include "Hero.h"
-#include "Enemy.h"
-#include "Weapon.h"
-#include "Utils.h"
 #include "GameFactory.h"
+#include "Utils.h"
 
 #include <iostream>
 #include <vector>
@@ -13,7 +11,6 @@
 using namespace Game;
 
 int main() {
-    // Seed random generator
     srand(static_cast<unsigned int>(time(nullptr)));
 
     // Hero
@@ -24,24 +21,21 @@ int main() {
     std::vector<std::shared_ptr<Character>> enemies;
     enemies.push_back(GameFactory::spawnRandomEnemy());
 
-    // Important: give Utils a pointer to enemies
+    // Zet Utils::enemyList naar onze vector, zodat enemies zichzelf kunnen summon
     Utils::enemyList = &enemies;
 
-    std::cout << hero->getName() << " ontmoet "
-              << enemies[0]->getName() << "!\n\n";
-
-    std::cout << "Start status:\n";
-    std::cout << *hero << "\n";
-    std::cout << *enemies[0] << "\n\n";
+    std::cout << hero->getName() << " ontmoet " << enemies[0]->getName() << "!\n\n";
 
     int round = 1;
 
-    // While hero alive AND at least one enemy alive
     while (hero->getIsAlive() && !enemies.empty()) {
         std::cout << "=== Ronde " << round << " ===\n";
 
-        // Hero attack first enemy for simplicity
-        hero->attack(enemies[0].get());
+        // Poison damage van hero
+        std::dynamic_pointer_cast<Hero>(hero)->handlePoison();
+
+        // Hero valt eerste enemy aan
+        hero->attack(*enemies[0]);
         if (!enemies[0]->getIsAlive()) {
             std::cout << enemies[0]->getName() << " is verslagen!\n";
             enemies.erase(enemies.begin());
@@ -53,9 +47,9 @@ int main() {
             std::dynamic_pointer_cast<Hero>(hero)->heal(5);
         }
 
-        // Every enemy attacks hero
-        for (auto& e : enemies) {
-            e->attack(hero.get());
+        // Elke enemy valt hero aan, inclusief eventuele nieuwe summons
+        for (size_t i = 0; i < enemies.size(); ++i) {
+            enemies[i]->attack(*hero);
         }
 
         if (!hero->getIsAlive()) {
@@ -63,10 +57,10 @@ int main() {
             break;
         }
 
+        // Status na ronde
         std::cout << "Status na ronde " << round << ":\n";
         std::cout << *hero << "\n";
-        for (auto& e : enemies)
-            std::cout << *e << "\n";
+        for (auto& e : enemies) std::cout << *e << "\n";
         std::cout << "\n";
 
         round++;
@@ -74,8 +68,7 @@ int main() {
 
     std::cout << "\n=== Gevecht afgelopen ===\n";
     std::cout << *hero << "\n";
-    for (auto& e : enemies)
-        std::cout << *e << "\n";
+    for (auto& e : enemies) std::cout << *e << "\n";
 
     return 0;
 }

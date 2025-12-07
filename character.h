@@ -10,27 +10,23 @@ class Character {
 protected:
     std::string name;
     int health;
-    unsigned char baseDamage;   // memory efficient
-    unsigned char level;        // memory efficient
+    unsigned char baseDamage;
+    unsigned char level;
 
 public:
-    Character(); // default constructor
-    Character(const std::string& name, int health, unsigned char baseDamage); // parameterized constructor
-    Character(const Character& other); // copy constructor
+    Character();
+    Character(const std::string& name, int health, unsigned char baseDamage);
+    Character(const Character& other);
     virtual ~Character();
 
-    virtual void attack(Character* target) = 0;
+    virtual void attack(Character& target) = 0;
 
-    // Getters
     int getHealth() const { return health; }
     const std::string& getName() const { return name; }
-    int getLevel() const { return level; }  // getter level
+    int getLevel() const { return level; }
     bool getIsAlive() const { return health > 0; }
 
-    // Setters
     void setHealth(int h) { this->health = h; }
-
-    // Level up
     void levelUp() { level++; }
 
     virtual void takeDamage(int amount);
