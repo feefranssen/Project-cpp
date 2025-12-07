@@ -7,8 +7,8 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <ctime>      // voor srand(time(0))
-#include <cstdlib>    // voor rand()
+#include <ctime>
+#include <cstdlib>
 
 using namespace Game;
 
@@ -16,40 +16,48 @@ int main() {
     // Seed random generator
     srand(static_cast<unsigned int>(time(nullptr)));
 
-    // Hero krijgt een random wapen
+    // Hero
     std::shared_ptr<Character> hero =
         std::make_shared<Hero>("Arthur", 40, GameFactory::getRandomHeroWeapon());
 
-    // Spawn één random Enemy
-    std::shared_ptr<Character> enemy = GameFactory::spawnRandomEnemy();
+    // Vector enemies
+    std::vector<std::shared_ptr<Character>> enemies;
+    enemies.push_back(GameFactory::spawnRandomEnemy());
 
-    std::vector<std::shared_ptr<Character>> characters = {hero, enemy};
+    // Important: give Utils a pointer to enemies
+    Utils::enemyList = &enemies;
 
-    std::cout << hero->getName() << " ontmoet " << enemy->getName() << "!\n\n";
+    std::cout << hero->getName() << " ontmoet "
+              << enemies[0]->getName() << "!\n\n";
 
     std::cout << "Start status:\n";
     std::cout << *hero << "\n";
-    std::cout << *enemy << "\n\n";
+    std::cout << *enemies[0] << "\n\n";
 
     int round = 1;
 
-    while (hero->getIsAlive() && enemy->getIsAlive()) {
+    // While hero alive AND at least one enemy alive
+    while (hero->getIsAlive() && !enemies.empty()) {
         std::cout << "=== Ronde " << round << " ===\n";
 
-        // Hero valt Enemy aan
-        hero->attack(enemy.get());
-        if (!enemy->getIsAlive()) {
-            std::cout << enemy->getName() << " is verslagen!\n";
-            break;
+        // Hero attack first enemy for simplicity
+        hero->attack(enemies[0].get());
+        if (!enemies[0]->getIsAlive()) {
+            std::cout << enemies[0]->getName() << " is verslagen!\n";
+            enemies.erase(enemies.begin());
+            if (enemies.empty()) break;
         }
 
-        // Hero kan ook healen (optioneel, 30% kans)
+        // Hero heal chance
         if (rand() % 100 < 30) {
             std::dynamic_pointer_cast<Hero>(hero)->heal(5);
         }
 
-        // Enemy valt Hero aan
-        enemy->attack(hero.get());
+        // Every enemy attacks hero
+        for (auto& e : enemies) {
+            e->attack(hero.get());
+        }
+
         if (!hero->getIsAlive()) {
             std::cout << hero->getName() << " is verslagen!\n";
             break;
@@ -57,14 +65,17 @@ int main() {
 
         std::cout << "Status na ronde " << round << ":\n";
         std::cout << *hero << "\n";
-        std::cout << *enemy << "\n\n";
+        for (auto& e : enemies)
+            std::cout << *e << "\n";
+        std::cout << "\n";
 
         round++;
     }
 
     std::cout << "\n=== Gevecht afgelopen ===\n";
     std::cout << *hero << "\n";
-    std::cout << *enemy << "\n";
+    for (auto& e : enemies)
+        std::cout << *e << "\n";
 
     return 0;
 }

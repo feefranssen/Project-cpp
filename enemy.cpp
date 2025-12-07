@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Utils.h"
 #include <iostream>
 
 namespace Game {
@@ -40,8 +41,15 @@ void Enemy::attack(Character* target) {
     // Summon chance
     if (rand() % 100 < 20) {
         std::cout << name << " roept een extra enemy op!!\n";
-        // dit kun je later uitbreiden
+
+        if (Utils::enemyList) {
+            Utils::enemyList->push_back(
+                std::make_shared<Enemy>("Minion", 20, Weapon("Claws", 4))
+                );
+        }
+
     }
+
 
     // Become aggressive
     if (rand() % 100 < 30) {

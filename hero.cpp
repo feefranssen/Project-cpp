@@ -1,3 +1,4 @@
+#include "Utils.h"
 #include "Hero.h"
 #include <iostream>
 
@@ -43,11 +44,17 @@ void Hero::takeDamage(int amount) {
 
 
 void Hero::heal(int amount) {
-    std::cout << name << " healt zichzelf voor "
-              << amount << " HP!\n";
+    std::cout << name << " healt zichzelf voor " << amount << " HP!\n";
+
     int newHP = health + amount;
+
+    // template-functie gebruiken
+    newHP = Utils::clamp<int>(newHP, 0, 100); // <-- <int> is belangrijk voor templates
+
     setHealth(newHP);
 }
+
+
 
 void Hero::setWeapon(const Weapon& weapon) {
     this->weapon = weapon;
