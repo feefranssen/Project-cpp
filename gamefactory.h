@@ -12,6 +12,8 @@ class GameFactory {
 public:
     static Weapon getRandomHeroWeapon();
     static std::shared_ptr<Character> spawnRandomEnemy();
+    static void describeEnemyType(const Enemy& e);
+
 };
 
 }

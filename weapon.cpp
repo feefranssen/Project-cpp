@@ -24,4 +24,12 @@ std::ostream& operator<<(std::ostream& os, const Weapon& w) {
     return os;
 }
 
+int Weapon::compare(const Weapon& other) const {
+    // vergelijk pure baseDamage (niet random damage!)
+    if (baseDamage > other.baseDamage) return 1;
+    if (baseDamage < other.baseDamage) return -1;
+    return 0;
+}
+
+
 }

@@ -19,6 +19,9 @@ public:
 
     std::string getName() const;
     int getDamage() const;
+    int getBaseDamage() const { return static_cast<int>(baseDamage); } // toegevoegd
+
+     int compare(const Weapon& other) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Weapon& w);
 };

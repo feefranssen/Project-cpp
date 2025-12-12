@@ -7,6 +7,8 @@
 
 namespace Game {
 
+class Hero; // forward declaration
+
 class Enemy : public Character {
 private:
     Weapon weapon;
@@ -24,6 +26,10 @@ public:
     bool isAggressive() const { return aggressive; }
     void applyAggression() { aggressive = true; }
     void consumeAggression() { aggressive = false; }
+
+    // Nieuwe functies
+    void inspectTarget(const Character& c) const;
+    bool compareHero(const Hero& h) const;
 };
 
 }

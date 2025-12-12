@@ -12,6 +12,8 @@ public:
     // Pointer naar de enemy lijst
     static std::vector<std::shared_ptr<Character>>* enemyList;
 
+    static bool isLowHP(const Character& c, int threshold);
+
     // Template functie
     template<typename T>
     static T clamp(T value, T min, T max) {

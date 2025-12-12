@@ -1,7 +1,7 @@
 #include "GameFactory.h"
-
 #include <random>
 #include <vector>
+#include <iostream>
 
 using namespace Game;
 
@@ -34,4 +34,11 @@ std::shared_ptr<Character> GameFactory::spawnRandomEnemy() {
     default:
         return std::make_shared<Enemy>("Goblin", 30, Weapon("Claws", 10));
     }
+}
+
+// Definieer describeEnemyType **buiten** spawnRandomEnemy
+void GameFactory::describeEnemyType(const Enemy& e) {
+    std::cout << "Enemy type: " << e.getName()
+    << ", Level: " << e.getLevel()
+    << ", HP: " << e.getHealth() << "\n";
 }

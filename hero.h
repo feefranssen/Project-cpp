@@ -10,7 +10,6 @@ namespace Game {
 class Hero : public Character {
 private:
     Weapon weapon;
-    unsigned char baseDamage;
     bool dodge();
     int poisonCounter = 0; // poison voor 2 rondes
 
@@ -24,6 +23,8 @@ public:
     virtual void attack(Character& target) override;
 
     void setWeapon(const Weapon& weapon);
+    Weapon getWeapon() const { return weapon; }
+
     void heal(int amount = 5);
 
     // Poison functies

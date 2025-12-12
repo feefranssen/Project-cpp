@@ -48,16 +48,23 @@ void Enemy::attack(Character& target) {
         std::cout << name << " stijgt naar level " << getLevel() << "!\n";
     }
 
-    if (rand() % 100 < 20) { // 20% kans
-        if (Utils::enemyList != nullptr && Utils::enemyList->size() < 2) { // max 2 enemies
-            std::shared_ptr<Character> newEnemy = GameFactory::spawnRandomEnemy();
-            Utils::enemyList->push_back(newEnemy);
-            std::cout << name << " roept een extra enemy op: "
-                      << newEnemy->getName() << "!\n";
-        }
-    }
+    // Summon alleen als max 2 enemies nog niet bereikt
+    if (rand() % 100 < 20 && Utils::enemyList != nullptr && Utils::enemyList->size() < 2) {
+        std::shared_ptr<Character> newEnemy = GameFactory::spawnRandomEnemy();
+        Utils::enemyList->push_back(newEnemy);
 
+        // Inspecteer hero omdat we een belangrijke actie uitvoeren
+        inspectTarget(*hero);
+
+        std::cout << name << " roept een extra enemy op: "
+                  << newEnemy->getName() << "!\n";
+    }
 }
 
+void Enemy::inspectTarget(const Character& c) const {
+    // Enkel printen als er echt iets gebeurt
+    std::cout << name << " bekijkt " << c.getName()
+              << " (HP: " << c.getHealth() << ", Level: " << c.getLevel() << ")\n";
+}
 
 }

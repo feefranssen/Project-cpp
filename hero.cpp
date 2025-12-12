@@ -1,6 +1,7 @@
 #include "Hero.h"
 #include "Utils.h"
 #include <iostream>
+#include <cstdlib>
 
 namespace Game {
 

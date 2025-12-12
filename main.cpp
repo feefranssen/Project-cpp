@@ -13,15 +13,15 @@ using namespace Game;
 int main() {
     srand(static_cast<unsigned int>(time(nullptr)));
 
-    // Hero
+    // Hero aanmaken
     std::shared_ptr<Character> hero =
         std::make_shared<Hero>("Arthur", 40, GameFactory::getRandomHeroWeapon());
 
-    // Vector enemies
+    // Vector van enemies
     std::vector<std::shared_ptr<Character>> enemies;
     enemies.push_back(GameFactory::spawnRandomEnemy());
 
-    // Zet Utils::enemyList naar onze vector, zodat enemies zichzelf kunnen summon
+    // Zet Utils::enemyList naar onze vector zodat enemies zichzelf kunnen summon
     Utils::enemyList = &enemies;
 
     std::cout << hero->getName() << " ontmoet " << enemies[0]->getName() << "!\n\n";
@@ -31,7 +31,7 @@ int main() {
     while (hero->getIsAlive() && !enemies.empty()) {
         std::cout << "=== Ronde " << round << " ===\n";
 
-        // Poison damage van hero
+        // Poison schade van hero
         std::dynamic_pointer_cast<Hero>(hero)->handlePoison();
 
         // Hero valt eerste enemy aan
@@ -42,7 +42,7 @@ int main() {
             if (enemies.empty()) break;
         }
 
-        // Hero heal chance
+        // Hero heeft een kans om te healen
         if (rand() % 100 < 30) {
             std::dynamic_pointer_cast<Hero>(hero)->heal(5);
         }
@@ -57,7 +57,20 @@ int main() {
             break;
         }
 
-        // Status na ronde
+        if (rand() % 100 < 20) {
+            Weapon found = GameFactory::getRandomHeroWeapon();
+            std::shared_ptr<Hero> h = std::dynamic_pointer_cast<Hero>(hero);
+
+            // Vergelijk damage van gevonden wapen met huidig wapen
+            if (found.getDamage() > h->getWeapon().getDamage()) {
+                std::cout << h->getName() << " vindt een beter wapen: "
+                          << found.getName()
+                          << " (Damage: " << found.getDamage() << ") en pakt het op!\n";
+                h->setWeapon(found);
+            }
+        }
+
+        // Status na ronde overzichtelijk printen
         std::cout << "Status na ronde " << round << ":\n";
         std::cout << *hero << "\n";
         for (auto& e : enemies) std::cout << *e << "\n";
