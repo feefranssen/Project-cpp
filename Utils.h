@@ -14,12 +14,16 @@ public:
 
     static bool isLowHP(const Character& c, int threshold);
 
+    static void createEnemyList();
+    static void destroyEnemyList();
+
     // Template functie
     template<typename T>
     static T clamp(T value, T min, T max) {
         if (value < min) return min;
         if (value > max) return max;
         return value;
+
     }
 };
 

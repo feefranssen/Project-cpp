@@ -13,7 +13,6 @@ class Enemy : public Character {
 private:
     Weapon weapon;
     bool aggressive;
-    unsigned char baseDamage;
 
 public:
     Enemy();
