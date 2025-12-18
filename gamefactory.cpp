@@ -42,3 +42,6 @@ void GameFactory::describeEnemyType(const Enemy& e) {
     << ", Level: " << e.getLevel()
     << ", HP: " << e.getHealth() << "\n";
 }
+
+
+

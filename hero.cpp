@@ -35,13 +35,14 @@ void Hero::attack(Character& target) {
 
 void Hero::takeDamage(int amount) {
     if (dodge()) {
-        std::cout << getName() << " dodged the attack!\n";
+        std::cout << this->getName() << " dodged the attack!\n";
         return;
     }
 
-    health -= amount;
-    if (health < 0) health = 0;
+    this->health -= amount;
+    if (this->health < 0) this->health = 0;
 }
+
 
 void Hero::heal(int amount) {
     int newHP = health + amount;
