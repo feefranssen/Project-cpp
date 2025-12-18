@@ -86,7 +86,7 @@ int main() {
 
     auto saveGame = [](const Hero& hero) {
         try {
-            std::ofstream outFile("C:\\Users\\12400249\\Desktop\\save.txt");
+            std::ofstream outFile("save.txt");
 
             if (!outFile.is_open()) {
                 throw std::runtime_error("save.txt kon niet geopend worden");
