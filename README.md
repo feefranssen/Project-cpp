@@ -26,9 +26,9 @@ Dit project is **bedoeld om gebouwd te worden met Qt**. Er is bewust gekozen voo
    - Voltooi de installatie met standaardinstellingen
 
 3. Repository clonen:
-   Open een terminal of Git Bash en voer uit:
-   cd <PROJECT_FOLDER>
-   git clone <https://github.com/feefranssen/Project-cpp>
+   - Open een terminal of Git Bash en voer uit:
+   - cd <PROJECT_FOLDER>
+   - git clone https://github.com/feefranssen/Project-cpp
    
 5. Project openen in Qt Creator:
    - Start Qt Creator
@@ -52,5 +52,6 @@ Dit project is **bedoeld om gebouwd te worden met Qt**. Er is bewust gekozen voo
 9. Verwacht resultaat:
    - Het bestand `save.txt` bevindt zich in de build-map van het project  
      (bijvoorbeeld: `build-<projectnaam>-Desktop_xxx/`)
+     
 
 Dit project kan volledig vanaf nul worden gebouwd en uitgevoerd op een schone computer door enkel Qt te installeren en bovenstaande stappen exact te volgen. Er zijn geen extra configuraties, externe libraries of handmatige aanpassingen nodig.
