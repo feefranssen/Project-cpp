@@ -1,8 +1,8 @@
 #include "Enemy.h"
 #include "Hero.h"
-#include "Utils.h"
 #include "GameFactory.h"
 #include <iostream>
+#include <cstdlib>
 
 namespace Game {
 
@@ -17,7 +17,8 @@ Enemy::Enemy(const Enemy& other)
 
 Enemy::~Enemy() {}
 
-void Enemy::attack(Character& target) {
+void Enemy::attack(Character& target)
+{
     int damage = weapon.getDamage();
 
     if (isAggressive()) {
@@ -35,36 +36,17 @@ void Enemy::attack(Character& target) {
     Hero* hero = dynamic_cast<Hero*>(&target);
     if (hero && !hero->isPoisoned() && rand() % 100 < 25) {
         hero->setPoisonCounter(2);
-        std::cout << name << " vergiftigt " << hero->getName() << " voor 2 rondes!\n";
+        std::cout << name << " vergiftigt " << hero->getName() << "!\n";
     }
 
-    if (rand() % 100 < 30) {
-        applyAggression();
-        std::cout << name << " raakt agressief!\n";
-    }
-
-    if (rand() % 100 < 20) {
-        levelUp();
-        std::cout << name << " stijgt naar level " << getLevel() << "!\n";
-    }
-
-    // Summon alleen als max 2 enemies nog niet bereikt
-    if (rand() % 100 < 20 && Utils::enemyList != nullptr && Utils::enemyList->size() < 2) {
-        std::shared_ptr<Character> newEnemy = GameFactory::spawnRandomEnemy();
-        Utils::enemyList->push_back(newEnemy);
-
-        // Inspecteer hero omdat we een belangrijke actie uitvoeren
-        inspectTarget(*hero);
-
-        std::cout << name << " roept een extra enemy op: "
-                  << newEnemy->getName() << "!\n";
-    }
+    // Spawn logic verplaatsen naar main
 }
 
+
 void Enemy::inspectTarget(const Character& c) const {
-    // Enkel printen als er echt iets gebeurt
-    std::cout << name << " bekijkt " << c.getName()
-              << " (HP: " << c.getHealth() << ", Level: " << c.getLevel() << ")\n";
+    std::cout << name << " inspecteert "
+              << c.getName() << " (HP: "
+              << c.getHealth() << ")\n";
 }
 
 }
