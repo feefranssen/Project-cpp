@@ -44,4 +44,3 @@ void GameFactory::describeEnemyType(const Enemy& e) {
 }
 
 
-

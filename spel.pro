@@ -12,6 +12,7 @@ SOURCES += \
         Utils.cpp \
         character.cpp \
         enemy.cpp \
+        game.cpp \
         gamefactory.cpp \
         hero.cpp \
         main.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
         Utils.h \
         character.h \
         enemy.h \
+        game.h \
         gamefactory.h \
         hero.h \
         mainwindow.h \

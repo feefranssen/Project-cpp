@@ -6,7 +6,7 @@
 
 namespace Game {
 
-class Hero;
+class Hero; // forward declaration
 
 class Enemy : public Character {
 private:
@@ -21,6 +21,7 @@ public:
 
     virtual void attack(Character& target) override;
 
+    Weapon getWeapon() const { return weapon; }
 
     bool isAggressive() const { return aggressive; }
     void applyAggression() { aggressive = true; }

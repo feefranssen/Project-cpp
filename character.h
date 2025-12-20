@@ -26,7 +26,7 @@ public:
     int getLevel() const { return level; }
     bool getIsAlive() const { return health > 0; }
 
-    void setHealth(int h) { this->health = h; }
+    void setHealth(int h) { health = h; }
     void levelUp() { level++; }
 
     virtual void takeDamage(int amount);

@@ -6,10 +6,11 @@
 namespace Game {
 
 Hero::Hero()
-    : Character("DefaultHero", 100, 10), weapon("Fists", 5) {}
+    : Hero("DefaultHero", 100, Weapon("Fists", 5)) {}  // forward naar parameterized constructor
 
 Hero::Hero(const std::string& name, int health, const Weapon& weapon)
     : Character(name, health, weapon.getDamage()), weapon(weapon) {}
+
 
 Hero::Hero(const Hero& other)
     : Character(other), weapon(other.weapon) {}

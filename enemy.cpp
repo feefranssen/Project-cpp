@@ -1,24 +1,18 @@
 #include "Enemy.h"
 #include "Hero.h"
-#include "GameFactory.h"
 #include <iostream>
 #include <cstdlib>
 
 namespace Game {
 
-Enemy::Enemy()
-    : Character("Goblin", 40, 5), weapon("Claws", 5), aggressive(false) {}
-
+Enemy::Enemy() : Character("Goblin", 40, 5), weapon("Claws", 5), aggressive(false) {}
 Enemy::Enemy(const std::string& name, int health, const Weapon& weapon)
     : Character(name, health, weapon.getDamage()), weapon(weapon), aggressive(false) {}
-
 Enemy::Enemy(const Enemy& other)
     : Character(other), weapon(other.weapon), aggressive(other.aggressive) {}
-
 Enemy::~Enemy() {}
 
-void Enemy::attack(Character& target)
-{
+void Enemy::attack(Character& target) {
     int damage = weapon.getDamage();
 
     if (isAggressive()) {
@@ -38,15 +32,11 @@ void Enemy::attack(Character& target)
         hero->setPoisonCounter(2);
         std::cout << name << " vergiftigt " << hero->getName() << "!\n";
     }
-
-    // Spawn logic verplaatsen naar main
 }
 
-
 void Enemy::inspectTarget(const Character& c) const {
-    std::cout << name << " inspecteert "
-              << c.getName() << " (HP: "
-              << c.getHealth() << ")\n";
+    std::cout << name << " inspecteert " << c.getName()
+    << " (HP: " << c.getHealth() << ")\n";
 }
 
 }

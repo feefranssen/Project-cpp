@@ -19,17 +19,21 @@ Weapon& Weapon::operator=(const Weapon& other) {
 std::string Weapon::getName() const { return name; }
 int Weapon::getDamage() const { return static_cast<int>(baseDamage) + (rand() % 5 - 2); }
 
-std::ostream& operator<<(std::ostream& os, const Weapon& w) {
-    os << w.name << " (Damage: " << static_cast<int>(w.baseDamage) << ")";
-    return os;
-}
-
 int Weapon::compare(const Weapon& other) const {
-    // vergelijk pure baseDamage (niet random damage!)
     if (baseDamage > other.baseDamage) return 1;
     if (baseDamage < other.baseDamage) return -1;
     return 0;
 }
 
+// operator<<
+std::ostream& operator<<(std::ostream& os, const Weapon& w) {
+    os << w.name << " (Damage: " << static_cast<int>(w.baseDamage) << ")";
+    return os;
+}
+
+// operator>
+bool operator>(const Weapon& lhs, const Weapon& rhs) {
+    return lhs.baseDamage > rhs.baseDamage;
+}
 
 }

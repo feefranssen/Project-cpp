@@ -2,18 +2,11 @@
 
 namespace Game {
 
-Character::Character()
-    : name("Default"), health(50), baseDamage(5), level(1)
-{}
-
+Character::Character() : Character("Default", 50, 5) {}
 Character::Character(const std::string& name, int health, unsigned char baseDamage)
-    : name(name), health(health), baseDamage(baseDamage), level(1)
-{}
-
+    : name(name), health(health), baseDamage(baseDamage), level(1) {}
 Character::Character(const Character& other)
-    : name(other.name), health(other.health), baseDamage(other.baseDamage), level(other.level)
-{}
-
+    : name(other.name), health(other.health), baseDamage(other.baseDamage), level(other.level) {}
 Character::~Character() {}
 
 void Character::takeDamage(int amount) {
