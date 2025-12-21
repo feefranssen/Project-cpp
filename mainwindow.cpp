@@ -7,17 +7,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Start/restart button
+    // Start/restart knop
     connect(ui->startButton, &QPushButton::clicked, this, [this]() {
-        game.resetGame(); // nieuwe functie in Game.cpp
-        ui->textEdit->clear();
+        game.resetGame();       // maak hero + enemy opnieuw aan
+        ui->textEdit->clear();  // log leegmaken
         ui->textEdit->append("Game gestart!");
         updateLabels();
+        ui->stepButton->setEnabled(true);
     });
 
-    // Step button → 1 ronde hero-aanval
+    // Step knop → 1 ronde hero-aanval
     connect(ui->stepButton, &QPushButton::clicked, this, [this]() {
-        game.stepCombat(); // minimale ronde
+        game.stepCombat();
         ui->textEdit->append("Hero valt aan!");
         updateLabels();
     });
@@ -34,4 +35,10 @@ MainWindow::~MainWindow()
 void MainWindow::updateLabels() {
     ui->heroLabel->setText(QString::fromStdString("Hero HP: " + std::to_string(game.getHeroHP())));
     ui->enemyLabel->setText(QString::fromStdString("Enemy HP: " + std::to_string(game.getEnemyHP())));
+
+    // Step knop disablen als hero of enemy dood is
+    if (game.getHeroHP() <= 0 || game.getEnemyHP() <= 0)
+        ui->stepButton->setEnabled(false);
+    else
+        ui->stepButton->setEnabled(true);
 }

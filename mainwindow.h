@@ -18,9 +18,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Game::Game game; // Game object
+    Game::Game game;
 
-    void updateLabels(); // update hero/enemy labels
+    void updateLabels(); // update hero/enemy HP labels
 };
 
 #endif // MAINWINDOW_H
