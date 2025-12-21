@@ -55,3 +55,40 @@ Dit project is **bedoeld om gebouwd te worden met Qt**. Er is bewust gekozen voo
      
 
 Dit project kan volledig vanaf nul worden gebouwd en uitgevoerd op een schone computer door enkel Qt te installeren en bovenstaande stappen exact te volgen. Er zijn geen extra configuraties, externe libraries of handmatige aanpassingen nodig.
+
+
+## Test-driven development (geschreven testplan)
+
+Voor de implementatie van de spel­logica zijn onderstaande testgevallen opgesteld om het correcte gedrag van de belangrijkste onderdelen te verifiëren.  
+Deze testgevallen zijn gebruikt voor manuele verificatie tijdens de ontwikkeling.
+
+### Testgevallen
+
+1. **Character ontvangt schade**
+- Gegeven een character met 50 HP  
+- Wanneer het character 20 schade ontvangt  
+- Dan moet de HP 30 zijn  
+
+2. **Character kan geen negatieve HP hebben**
+- Gegeven een character met 10 HP  
+- Wanneer het character 50 schade ontvangt  
+- Dan moet de HP 0 zijn  
+
+3. **Hero geneest correct**
+- Gegeven een hero met 80 HP  
+- Wanneer de hero 10 HP geneest  
+- Dan moet de HP 90 zijn  
+
+4. **Enemy aanval verlaagt hero HP**
+- Gegeven een hero en een enemy  
+- Wanneer de enemy de hero aanvalt  
+- Dan moet de HP van de hero verminderen  
+
+5. **Poison schade wordt correct toegepast**
+- Gegeven een vergiftigde hero  
+- Wanneer twee rondes voorbijgaan  
+- Dan wordt poison schade twee keer toegepast en stopt daarna  
+
+> **Opmerking:** Het testplan is opgesteld om alle kernfunctionaliteit van het spel systematisch te controleren. Het kan handmatig uitgevoerd worden om te verifiëren dat alle features correct werken.
+
+---
