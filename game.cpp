@@ -122,5 +122,32 @@ void Game::combatLoop() {
     std::thread saveThread(saveGame, *std::dynamic_pointer_cast<Hero>(hero)); //Vraag 41 – useful usage of threads
     saveThread.join();
 }
+int Game::Game::getHeroHP() const {
+    return hero->getHealth();
+}
+
+int Game::Game::getEnemyHP() const {
+    return enemies.empty() ? 0 : enemies.front()->getHealth();
+}
+
+void Game::Game::stepCombat() {
+    if (!hero->getIsAlive() || enemies.empty()) return;
+
+    // Hero valt eerste enemy aan
+    hero->attack(*enemies.front());
+    if (!enemies.front()->getIsAlive()) {
+        enemies.erase(enemies.begin());
+        return;
+    }
+
+    // Eerste enemy valt terug
+    enemies.front()->attack(*hero);
+}
+
+void Game::Game::resetGame() {
+    hero = std::make_shared<Hero>("Arthur", 40, GameFactory::getRandomHeroWeapon());
+    enemies.clear();
+    enemies.push_back(GameFactory::spawnRandomEnemy());
+}
 
 }

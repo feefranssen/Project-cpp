@@ -29,6 +29,11 @@ public:
     Game();
     ~Game();
     void startGame();
+
+    int getHeroHP() const;
+    int getEnemyHP() const;
+    void stepCombat();  // voer 1 ronde uit
+    void resetGame();   // hero + enemies opnieuw aanmaken
 };
 
 }
