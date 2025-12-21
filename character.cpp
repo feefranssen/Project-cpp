@@ -3,10 +3,13 @@
 namespace Game {
 
 Character::Character() : Character("Default", 50, 5) {}
-Character::Character(const std::string& name, int health, unsigned char baseDamage)
+
+Character::Character(const std::string& name, int health, unsigned char baseDamage)  // Vraag 16 – member initialization list
     : name(name), health(health), baseDamage(baseDamage), level(1) {}
+
 Character::Character(const Character& other)
     : name(other.name), health(other.health), baseDamage(other.baseDamage), level(other.level) {}
+
 Character::~Character() {}
 
 void Character::takeDamage(int amount) {

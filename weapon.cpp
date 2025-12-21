@@ -3,11 +3,14 @@
 
 namespace Game {
 
-Weapon::Weapon() : Weapon("Fists", 3) {}
-Weapon::Weapon(const std::string& name, unsigned char baseDamage)
+Weapon::Weapon() : Weapon("Fists", 3) {}// Vraag 12 – default constructor
+
+Weapon::Weapon(const std::string& name, unsigned char baseDamage)// Vraag 35 – string usage
     : name(name), baseDamage(baseDamage) {}
-Weapon::Weapon(const Weapon& other)
+
+Weapon::Weapon(const Weapon& other)     // Vraag 14 – copy constructor
     : name(other.name), baseDamage(other.baseDamage) {}
+
 Weapon& Weapon::operator=(const Weapon& other) {
     if (this != &other) {
         name = other.name;

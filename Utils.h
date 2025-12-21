@@ -6,12 +6,12 @@
 
 namespace Game {
 
-class Utils {
+class Utils {  // Vraag 5 – maintainability: hulpfuncties met duidelijke namen
 public:
-    static bool isLowHP(const Character& c, int threshold);
+    static bool isLowHP(const Character& c, int threshold); // Vraag 30 – const reference parameter
 
     template<typename T>
-    static T clamp(T value, T min, T max) {
+    static T clamp(T value, T min, T max) {  // Vraag 25 – template function
         if (value < min) return min;
         if (value > max) return max;
         return value;

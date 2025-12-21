@@ -6,7 +6,7 @@
 #include "Character.h"
 #include "Enemy.h"
 
-namespace Game {
+namespace Game {    // Vraag 27 – self-made namespace
 
 class GameFactory {
 public:

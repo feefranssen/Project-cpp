@@ -20,7 +20,7 @@ struct CombatLog {
 class Game {
 private:
     std::shared_ptr<Character> hero;
-    std::vector<std::shared_ptr<Character>> enemies;
+    std::vector<std::shared_ptr<Character>> enemies;    // Vraag 36 – useful container
     CombatLog* combatLog;
 
     void combatLoop();

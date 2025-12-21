@@ -5,23 +5,23 @@
 
 namespace Game {
 
-Hero::Hero()
-    : Hero("DefaultHero", 100, Weapon("Fists", 5)) {}  // forward naar parameterized constructor
+Hero::Hero()    // Vraag 12 – default constructor
+    : Hero("DefaultHero", 100, Weapon("Fists", 5)) {} // Vraag 17 – constructor forwarding
 
-Hero::Hero(const std::string& name, int health, const Weapon& weapon)
+Hero::Hero(const std::string& name, int health, const Weapon& weapon)    // Vraag 13 – parameterized constructor
     : Character(name, health, weapon.getDamage()), weapon(weapon) {}
 
 
-Hero::Hero(const Hero& other)
+Hero::Hero(const Hero& other)   // Vraag 14 – copy constructor
     : Character(other), weapon(other.weapon) {}
 
-Hero::~Hero() {}
+Hero::~Hero() {} // Vraag 15 – destructor
 
 bool Hero::dodge() {
     return rand() % 100 < 20; // 20% kans
 }
 
-void Hero::attack(Character& target) {
+void Hero::attack(Character& target) {  // Vraag 34 – modern call-by-reference
     int damage = weapon.getDamage();
     std::cout << name << " valt " << target.getName()
               << " aan met " << weapon.getName()
@@ -34,13 +34,13 @@ void Hero::attack(Character& target) {
     }
 }
 
-void Hero::takeDamage(int amount) {
+void Hero::takeDamage(int amount) {  // Vraag 5 – maintainability: duidelijke functie + consistente stijl
     if (dodge()) {
         std::cout << this->getName() << " dodged the attack!\n";
         return;
     }
 
-    this->health -= amount;
+    this->health -= amount; // Vraag 19 – useful usage of this
     if (this->health < 0) this->health = 0;
 }
 

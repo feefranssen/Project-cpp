@@ -6,7 +6,7 @@
 using namespace Game;
 
 Weapon GameFactory::getRandomHeroWeapon() {
-    static std::vector<Weapon> heroWeapons = {
+    static std::vector<Weapon> heroWeapons = {  // Vraag 3 – No globals, but statics if needed
         Weapon("Sword", 10),
         Weapon("Axe", 12),
         Weapon("Dagger", 8)

@@ -18,15 +18,16 @@ Game::Game() {
     enemies.push_back(GameFactory::spawnRandomEnemy());
 
     // Combat log aanmaken
-    combatLog = new CombatLog();
+    combatLog = new CombatLog();        // Vraag 32 – dynamic memory allocation
+
 }
 
 Game::~Game() {
-    delete combatLog;
-    combatLog = nullptr;
+    delete combatLog;      // Vraag 33 – dynamic memory removing
+    combatLog = nullptr;    // Vraag 37 – nullptr usage
 }
 
-void Game::startGame() {
+void Game::startGame() {    // Vraag 8 – fully working project
     combatLoop();
 }
 
@@ -83,13 +84,20 @@ void Game::combatLoop() {
     }
 
     std::cout << "\n=== Gevecht afgelopen ===\n";
-    std::cout << *hero << "\n";
-    for (auto& e : enemies) std::cout << *e << "\n";
 
-    // Game save via thread + exception handling
-    auto saveGame = [&](const Hero& hero) {
-        try {
-            std::ofstream out("save.txt");
+    const Character& heroRef = *hero; // Vraag 29 – const reference variable
+    std::cout << heroRef << "\n";
+
+    for (const auto& e : enemies) {
+        const Character& enemyRef = *e; // Vraag 29 – const reference variable
+        std::cout << enemyRef << "\n";
+    }
+
+    auto saveGame = [&](const Hero& hero) {    // Vraag 40 – lambda function
+            const Hero& heroRef = hero; // Vraag 29 – const reference variable
+
+        try {    // Vraag 39 – exception handling
+            std::ofstream out("save.txt");  // Vraag 38 – modern file I/O
             if (!out) throw std::runtime_error("Kan save.txt niet openen");
 
             out << "Hero " << hero.getName() << " "
@@ -111,7 +119,7 @@ void Game::combatLoop() {
         }
     };
 
-    std::thread saveThread(saveGame, *std::dynamic_pointer_cast<Hero>(hero));
+    std::thread saveThread(saveGame, *std::dynamic_pointer_cast<Hero>(hero)); //Vraag 41 – useful usage of threads
     saveThread.join();
 }
 

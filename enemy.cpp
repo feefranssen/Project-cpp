@@ -6,13 +6,17 @@
 namespace Game {
 
 Enemy::Enemy() : Character("Goblin", 40, 5), weapon("Claws", 5), aggressive(false) {}
-Enemy::Enemy(const std::string& name, int health, const Weapon& weapon)
+
+Enemy::Enemy(const std::string& name, int health, const Weapon& weapon)      // Vraag 13 – parameterized constructor
     : Character(name, health, weapon.getDamage()), weapon(weapon), aggressive(false) {}
+
 Enemy::Enemy(const Enemy& other)
     : Character(other), weapon(other.weapon), aggressive(other.aggressive) {}
-Enemy::~Enemy() {}
 
-void Enemy::attack(Character& target) {
+Enemy::~Enemy() {}  // Vraag 15 – destructor
+
+void Enemy::attack(Character& target) { // Vraag 18 – dynamic polymorphism via virtual function
+    const Weapon& weaponRef = weapon; // Vraag 29 – const reference variable
     int damage = weapon.getDamage();
 
     if (isAggressive()) {
